@@ -82,6 +82,22 @@ You may use \"􁷘\" as an SF Symbol on macOS."
   :type 'string
   :group 'agent-shell)
 
+(defcustom agent-shell-thought-process-expand-by-default nil
+  "Whether thought process sections should be expanded by default.
+
+When nil (the default), thought process sections are collapsed.
+When non-nil, thought process sections are expanded."
+  :type 'boolean
+  :group 'agent-shell)
+
+(defcustom agent-shell-tool-use-expand-by-default nil
+  "Whether tool use sections should be expanded by default.
+
+When nil (the default), tool use sections are collapsed.
+When non-nil, tool use sections are expanded."
+  :type 'boolean
+  :group 'agent-shell)
+
 (defcustom agent-shell-show-config-icons t
   "Whether to show icons in agent config selection."
   :type 'boolean
@@ -695,7 +711,8 @@ Flow:
                   :state state
                   :block-id (map-elt update 'toolCallId)
                   :label-left (map-elt tool-call-labels :status)
-                  :label-right (map-elt tool-call-labels :title))
+                  :label-right (map-elt tool-call-labels :title)
+                  :expanded agent-shell-tool-use-expand-by-default)
                  ;; Display plan as markdown block if present
                  (when-let ((plan (map-nested-elt update '(rawInput plan))))
                    (agent-shell--update-fragment
@@ -723,7 +740,8 @@ Flow:
                                 (propertize "Thought process" 'font-lock-face font-lock-doc-markup-face))
                   :body .content.text
                   :append (equal (map-elt state :last-entry-type)
-                                 "agent_thought_chunk")))
+                                 "agent_thought_chunk")
+                  :expanded agent-shell-thought-process-expand-by-default))
                (map-put! state :last-entry-type "agent_thought_chunk"))
               ((equal (map-elt update 'sessionUpdate) "agent_message_chunk")
                (unless (equal (map-elt state :last-entry-type) "agent_message_chunk")
@@ -811,7 +829,8 @@ Flow:
                       :block-id .toolCallId
                       :label-left (map-elt tool-call-labels :status)
                       :label-right (map-elt tool-call-labels :title)
-                      :body (string-trim body-text)))))
+                      :body (string-trim body-text)
+                      :expanded agent-shell-tool-use-expand-by-default))))
                (map-put! state :last-entry-type "tool_call_update"))
               ((equal (map-elt update 'sessionUpdate) "available_commands_update")
                (let-alist update
