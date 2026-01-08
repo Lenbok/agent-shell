@@ -105,6 +105,7 @@ Returns an agent configuration alist using `agent-shell-make-agent-config'."
    :buffer-name "Droid"
    :shell-prompt "Droid> "
    :shell-prompt-regexp "Droid> "
+   :icon-name "https://avatars.githubusercontent.com/u/131064358"
    :welcome-function #'agent-shell-droid--welcome-message
    :client-maker (lambda (buffer)
                    (agent-shell-droid-make-client :buffer buffer))
@@ -159,14 +160,13 @@ Uses `agent-shell-droid-authentication' for authentication configuration."
   "Factory Droid ASCII art."
   (let* ((is-dark (eq (frame-parameter nil 'background-mode) 'dark))
          (text (string-trim "
-  ______         _                     _____            _     _
- |  ____|       | |                   |  __ \\          (_)   | |
- | |__ __ _  ___| |_ ___  _ __ _   _  | |  | |_ __ ___  _  __| |
- |  __/ _` |/ __| __/ _ \\| '__| | | | | |  | | '__/ _ \\| |/ _` |
- | | | (_| | (__| || (_) | |  | |_| | | |__| | | | (_) | | (_| |
- |_|  \\__,_|\\___|\\__\\___/|_|   \\__, | |_____/|_|  \\___/|_|\\__,_|
-                                __/ |
-                               |___/
+░░░░░░░░░    ░░░░░░░░░     ░░░░░░░░    ░░░   ░░░░░░░░░
+░░░    ░░░   ░░░    ░░░   ░░░    ░░░   ░░░   ░░░    ░░░
+░░░    ░░░   ░░░    ░░░   ░░░    ░░░   ░░░   ░░░    ░░░
+░░░    ░░░   ░░░░░░░░░    ░░░    ░░░   ░░░   ░░░    ░░░
+░░░    ░░░   ░░░    ░░░   ░░░    ░░░   ░░░   ░░░    ░░░
+░░░    ░░░   ░░░    ░░░   ░░░    ░░░   ░░░   ░░░    ░░░
+░░░░░░░░░    ░░░    ░░░    ░░░░░░░░    ░░░   ░░░░░░░░░
 " "\n")))
     (propertize text 'font-lock-face (if is-dark
                                          '(:foreground "#8b949e" :inherit fixed-pitch)
