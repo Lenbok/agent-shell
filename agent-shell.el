@@ -2099,7 +2099,7 @@ Icon names starting with https:// are downloaded directly from that location."
           (when buffer
             (with-current-buffer buffer
               (goto-char (point-min))
-              (if (re-search-forward "^HTTP/1.1 200 OK" nil t)
+              (if (re-search-forward "^HTTP/[0-9.]+ 200" nil t)
                   (progn
                     (re-search-forward "\r?\n\r?\n")
                     (let ((coding-system-for-write 'no-conversion))
