@@ -269,6 +269,7 @@ Assume screenshot file path will be appended to this list."
   :type '(repeat string)
   :group 'agent-shell)
 
+;;;###autoload
 (cl-defun agent-shell-make-agent-config (&key identifier
                                               mode-line-name welcome-function
                                               buffer-name shell-prompt shell-prompt-regexp
