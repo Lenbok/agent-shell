@@ -3070,7 +3070,7 @@ Uses AGENT-CWD to shorten file paths where necessary."
                                           :max-width 200)))
                      ;; Propertize text to display the image
                      (agent-shell-ui-add-action-to-text
-                      (propertize file
+                      (propertize (concat "@" file)
                                   'display image-display
                                   'pointer 'hand)
                       (lambda ()
@@ -3084,9 +3084,9 @@ Uses AGENT-CWD to shorten file paths where necessary."
                    (agent-shell-ui-add-action-to-text
                     (if (and agent-cwd (file-in-directory-p file agent-cwd))
                         ;; File within project, shorten path.
-                        (propertize (file-relative-name file agent-cwd)
+                        (propertize (concat "@" (file-relative-name file agent-cwd))
                                     'pointer 'hand)
-                      (propertize file
+                      (propertize (concat "@" file)
                                   'pointer 'hand))
                     (lambda ()
                       (interactive)
