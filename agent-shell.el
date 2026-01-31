@@ -426,7 +426,7 @@ package. See documentation of that package for more configuration:
                 (url . ,(format \"http://localhost:%d/mcp/%s\"
                            (claude-code-ide-mcp-server-ensure-server)
                            session-id)))))))"
-  :type '(repeat (alist :key-type symbol :value-type (choice sexp function)))
+  :type '(repeat (choice (alist :key-type symbol :value-type sexp) function))
   :group 'agent-shell)
 
 (cl-defun agent-shell--make-state (&key agent-config buffer client-maker needs-authentication authenticate-request-maker heartbeat)
