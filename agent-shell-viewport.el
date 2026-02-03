@@ -61,6 +61,7 @@
 (declare-function agent-shell-ui-backward-block "agent-shell")
 (declare-function agent-shell-ui-forward-block "agent-shell")
 (declare-function agent-shell-ui-mode "agent-shell")
+(declare-function agent-shell-completion-mode "agent-shell-completion")
 
 (defvar agent-shell-header-style)
 (defvar agent-shell-prefer-viewport-interaction)

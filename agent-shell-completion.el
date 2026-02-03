@@ -29,6 +29,9 @@
 (require 'map)
 (require 'agent-shell-project)
 
+(declare-function agent-shell--shell-buffer "agent-shell")
+(declare-function agent-shell--project-files "agent-shell-project")
+
 (defvar agent-shell--state)
 
 (defcustom agent-shell-file-completion-enabled t
