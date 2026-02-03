@@ -593,7 +593,9 @@ handles viewport mode detection, existing shell reuse, and project context."
   (interactive)
   (let ((shell-buffer (if agent-shell-prefer-viewport-interaction
                           (agent-shell-viewport--buffer)
-                        (agent-shell--current-shell))))
+                        (or (agent-shell--current-shell)
+                            (seq-first (agent-shell-project-buffers))
+                            (seq-first (agent-shell-buffers))))))
     (unless shell-buffer
       (user-error "No agent shell buffers available for current project"))
     (if-let ((window (get-buffer-window shell-buffer)))
