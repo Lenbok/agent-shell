@@ -287,13 +287,6 @@ Assume screenshot file path will be appended to this list."
   :type '(repeat string)
   :group 'agent-shell)
 
-(defcustom agent-shell-worktree-root-directory "~/.agent-shell/worktrees"
-  "Root directory for git worktrees created by `agent-shell-new-worktree-shell'.
-
-Each worktree will be created under <root>/<repo-name>/<worktree-name>."
-  :type 'directory
-  :group 'agent-shell)
-
 ;;;###autoload
 (cl-defun agent-shell-make-agent-config (&key identifier
                                               mode-line-name welcome-function

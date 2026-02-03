@@ -30,9 +30,10 @@
 
 (require 'subr-x)
 
-(defvar agent-shell-worktree-root-directory)
-
 (declare-function agent-shell "agent-shell")
+
+;; Worktree root directory
+(defconst agent-shell-worktree--root-directory "~/.agent-shell/worktrees")
 
 ;; Word lists for generating random worktree names (Docker-style naming)
 (defconst agent-shell-worktree--adjectives
@@ -116,7 +117,7 @@ Or nil if not in a repo."
 
 The worktree is created at <worktree-root>/<repo-name>/<worktree-name>
 where:
-- <worktree-root> is `agent-shell-worktree-root-directory'
+- <worktree-root> is `agent-shell-worktree--root-directory'
 - <repo-name> is the current repository's directory name
 - <worktree-name> is a randomly generated name (e.g., \"adoring-hawking\")
 
@@ -127,7 +128,7 @@ The user is prompted to confirm or edit the worktree path before creation."
   (let* ((repo-name (agent-shell-worktree--git-repo-name))
          (worktree-name (agent-shell-worktree--generate-name))
          (default-path (file-name-concat
-                        agent-shell-worktree-root-directory
+                        agent-shell-worktree--root-directory
                         repo-name worktree-name))
          (worktree-path (expand-file-name (read-directory-name
                                            "Worktree directory: "
