@@ -303,14 +303,20 @@ Optionally set its PROMPT and RESPONSE."
   (interactive)
   (agent-shell-viewport--ensure-buffer)
   (setq agent-shell-viewport--compose-snapshot nil)
-  (if (or (derived-mode-p 'agent-shell-viewport-view-mode)
-          (with-current-buffer (agent-shell-viewport--shell-buffer)
-            (not (shell-maker-history))))
-      (bury-buffer)
-    ;; Edit mode
-    (when (or (string-empty-p (string-trim (buffer-string)))
-              (y-or-n-p "Discard composed prompt? "))
-      (agent-shell-viewport-view-last))))
+  (let ((viewport-buffer (current-buffer))
+        (shell-buffer (agent-shell-viewport--shell-buffer)))
+    ;; View mode
+    (if (or (derived-mode-p 'agent-shell-viewport-view-mode)
+            (with-current-buffer shell-buffer
+              (not (shell-maker-history))))
+        (bury-buffer)
+      ;; Edit mode
+      (when (or (string-empty-p (string-trim (buffer-string)))
+                (y-or-n-p "Discard composed prompt? "))
+        (if agent-shell-prefer-viewport-interaction
+            (agent-shell-viewport-view-last)
+          (agent-shell-other-buffer)
+          (kill-buffer viewport-buffer))))))
 
 (defun agent-shell-viewport-compose-peek-last ()
   "Save compose buffer snapshot and peek at the last interaction."
