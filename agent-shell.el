@@ -2978,6 +2978,7 @@ If FILE-PATH is not an image, returns nil."
        (cond
         ((equal type "resource") (list (map-nested-elt content-block '(resource uri))))
         ((equal type "resource_link") (list (map-elt content-block 'uri)))
+        ((equal type "image") (list (map-elt content-block 'uri)))
         (t nil))))
    content-blocks))
 
